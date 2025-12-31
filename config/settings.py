@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     "withdrawals",
     "analytics",
     "dashboard",
-    "rest_framework",
     "django_filters",
 ]
 
