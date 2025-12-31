@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     "withdrawals",
     "analytics",
     "dashboard",
-    "django_filters",
 ]
 
 MIDDLEWARE = [
