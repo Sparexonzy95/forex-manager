@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2>Deposits</h2>
+        <a href="/deposits/new"><button>Add Deposit</button></a>
+    </div>
+</div>
+
+<div class="card">
+    {% if deposits %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Rate</th>
+                    <th>Bank</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in deposits %}
+                <tr>
+                    <td>{{ d.date }}</td>
+                    <td><strong>{{ d.amount }}</strong></td>
+                    <td>{{ d.rate }}</td>
+                    <td>{{ d.bank }}</td>
+                    <td>
+                        <a href="/deposits/edit/{{ d.id }}/">Edit</a> |
+                        <a href="/deposits/delete/{{ d.id }}/">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div style="margin-top:15px;">
+            {% if deposits.has_previous %}
+                <a href="?page={{ deposits.previous_page_number }}">← Prev</a>
+            {% endif %}
+
+            <span style="margin:0 10px;">
+                Page {{ deposits.number }} of {{ deposits.paginator.num_pages }}
+            </span>
+
+            {% if deposits.has_next %}
+                <a href="?page={{ deposits.next_page_number }}">Next →</a>
+            {% endif %}
+        </div>
+
+    {% else %}
+        <div style="text-align:center; padding:40px;">
+            <h3>No deposits yet</h3>
+            <p style="color:#6b7280;">Add funds to start trading.</p>
+            <a href="/deposits/new"><button>Add your first deposit</button></a>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

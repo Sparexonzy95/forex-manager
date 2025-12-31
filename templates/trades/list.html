@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2>Trades</h2>
+        <a href="/trades/new"><button>Add Trade</button></a>
+    </div>
+</div>
+
+<div class="card">
+    {% if trades %}
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Pair</th>
+                <th>Profit</th>
+                <th>Loss</th>
+                <th>Balance</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for t in trades %}
+            <tr>
+                <td>{{ t.date }}</td>
+                <td>{{ t.pair }}</td>
+                <td style="color:green;">{{ t.profit }}</td>
+                <td style="color:red;">{{ t.loss }}</td>
+                <td>{{ t.closing_balance }}</td>
+                <td>
+                    <a href="/trades/edit/{{ t.id }}/">Edit</a> |
+                    <a href="/trades/delete/{{ t.id }}/">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <!-- Pagination -->
+        <div style="margin-top:15px;">
+            {% if trades.has_previous %}
+                <a href="?page={{ trades.previous_page_number }}">← Prev</a>
+            {% endif %}
+
+            <span style="margin:0 10px;">
+                Page {{ trades.number }} of {{ trades.paginator.num_pages }}
+            </span>
+
+            {% if trades.has_next %}
+                <a href="?page={{ trades.next_page_number }}">Next →</a>
+            {% endif %}
+        </div>
+
+    {% else %}
+        <p>No trades yet.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

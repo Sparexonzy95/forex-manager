@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <h2>Add Deposit</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label>Date</label>
+        {{ form.date }}
+
+        <label>Amount</label>
+        {{ form.amount }}
+
+        <label>Rate</label>
+        {{ form.rate }}
+
+        <label>Bank</label>
+        {{ form.bank }}
+
+        <button type="submit">Save Deposit</button>
+    </form>
+</div>
+
+{% endblock %}

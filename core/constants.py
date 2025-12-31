@@ -1,0 +1,17 @@
+BANK_CHOICES = [
+    ("GTB", "GTBank"),
+    ("ACCESS", "Access"),
+    ("ZENITH", "Zenith"),
+    ("UBA", "UBA"),
+    ("FIRST", "FirstBank"),
+    ("UNION", "Union"),
+    ("ECO", "Ecobank"),
+    ("POLARIS", "Polaris"),
+    ("KEYSTONE", "Keystone"),
+    ("STANBIC", "Stanbic"),
+    ("JAIZ", "Jaiz"),
+    ("FIDELITY", "Fidelity"),
+    ("OPAY", "Opay"),
+    ("PALMPAY", "PalmPay"),
+    ("MONIEPOINT", "Moniepoint"),
+]

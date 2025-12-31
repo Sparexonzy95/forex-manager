@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <h2>Edit Withdrawal</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label>Date</label>
+        {{ form.date }}
+
+        <label>Amount</label>
+        {{ form.amount }}
+
+        <label>Bank</label>
+        {{ form.bank }}
+
+        <button type="submit">Update Withdrawal</button>
+    </form>
+</div>
+
+{% endblock %}
