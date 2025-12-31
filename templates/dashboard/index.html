@@ -1,39 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1 style="margin-bottom:20px;">{{ account.name }}</h1>
+<h1>{{ account.name }}</h1>
 
-<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:20px;">
-
+<div class="grid">
     <div class="card">
         <h3>Balance</h3>
-        <p style="font-size:22px; font-weight:bold;">{{ balance }}</p>
+        <p style="font-size:22px;font-weight:700;">{{ balance }}</p>
     </div>
 
     <div class="card">
         <h3>Win Rate</h3>
-        <p style="font-size:22px; font-weight:bold;">{{ win_rate }}%</p>
+        <p style="font-size:22px;font-weight:700;">{{ win_rate }}%</p>
     </div>
 
     <div class="card">
         <h3>Expectancy</h3>
-        <p style="font-size:22px; font-weight:bold;">{{ expectancy }}</p>
+        <p style="font-size:22px;font-weight:700;">{{ expectancy }}</p>
     </div>
 
     <div class="card">
         <h3>Max Drawdown</h3>
-        <p style="font-size:22px; font-weight:bold; color:red;">
+        <p style="font-size:22px;font-weight:700;color:#dc2626;">
             {{ drawdown }}
         </p>
     </div>
-
 </div>
 
-<div class="card" style="margin-top:30px;">
+<div class="card">
     <h3>Quick Actions</h3>
-    <a href="/trades/new"><button>Add Trade</button></a>
-    <a href="/deposits/new"><button>Add Deposit</button></a>
-    <a href="/withdrawals/new"><button>Add Withdrawal</button></a>
+    <div class="grid">
+        <a href="/trades/new"><button>Add Trade</button></a>
+        <a href="/deposits/new"><button>Add Deposit</button></a>
+        <a href="/withdrawals/new"><button>Add Withdrawal</button></a>
+    </div>
 </div>
 
 {% endblock %}

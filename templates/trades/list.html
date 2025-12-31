@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="card">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
         <h2>Trades</h2>
         <a href="/trades/new"><button>Add Trade</button></a>
     </div>
@@ -10,48 +10,55 @@
 
 <div class="card">
     {% if trades %}
-        <table>
-            <tr>
-                <th>Date</th>
-                <th>Pair</th>
-                <th>Profit</th>
-                <th>Loss</th>
-                <th>Balance</th>
-                <th>Actions</th>
-            </tr>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Pair</th>
+                        <th>Lot Size</th>
+                        <th>Profit</th>
+                        <th>Loss</th>
+                        <th>Closing Balance</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in trades %}
+                    <tr>
+                        <td>{{ t.date }}</td>
+                        <td><strong>{{ t.pair }}</strong></td>
+                        <td>{{ t.lot_size }}</td>
+                        <td style="color:green;">{{ t.profit }}</td>
+                        <td style="color:red;">{{ t.loss }}</td>
+                        <td><strong>{{ t.closing_balance }}</strong></td>
+                        <td>
+                            <a href="/trades/edit/{{ t.id }}/">Edit</a> |
+                            <a href="/trades/delete/{{ t.id }}/">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-            {% for t in trades %}
-            <tr>
-                <td>{{ t.date }}</td>
-                <td>{{ t.pair }}</td>
-                <td style="color:green;">{{ t.profit }}</td>
-                <td style="color:red;">{{ t.loss }}</td>
-                <td>{{ t.closing_balance }}</td>
-                <td>
-                    <a href="/trades/edit/{{ t.id }}/">Edit</a> |
-                    <a href="/trades/delete/{{ t.id }}/">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-
-        <!-- Pagination -->
-        <div style="margin-top:15px;">
+        <div class="pagination">
             {% if trades.has_previous %}
                 <a href="?page={{ trades.previous_page_number }}">← Prev</a>
             {% endif %}
 
-            <span style="margin:0 10px;">
-                Page {{ trades.number }} of {{ trades.paginator.num_pages }}
-            </span>
+            <span>Page {{ trades.number }} of {{ trades.paginator.num_pages }}</span>
 
             {% if trades.has_next %}
                 <a href="?page={{ trades.next_page_number }}">Next →</a>
             {% endif %}
         </div>
-
     {% else %}
-        <p>No trades yet.</p>
+        <div style="text-align:center; padding:40px;">
+            <h3>No trades yet</h3>
+            <p style="color:#6b7280;">Start by adding your first trade.</p>
+            <a href="/trades/new"><button>Add Trade</button></a>
+        </div>
     {% endif %}
 </div>
 

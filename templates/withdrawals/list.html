@@ -2,68 +2,60 @@
 {% block content %}
 
 <div class="card">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
         <h2>Withdrawals</h2>
-        <a href="/withdrawals/new">
-            <button>Add Withdrawal</button>
-        </a>
+        <a href="/withdrawals/new"><button>Add Withdrawal</button></a>
     </div>
 </div>
 
 <div class="card">
     {% if withdrawals %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Amount</th>
-                    <th>Bank</th>
-                    <th>Capital Before</th>
-                    <th>Capital After</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for w in withdrawals %}
-                <tr>
-                    <td>{{ w.date }}</td>
-                    <td><strong>{{ w.amount }}</strong></td>
-                    <td>{{ w.bank }}</td>
-                    <td>{{ w.capital_before }}</td>
-                    <td><strong>{{ w.capital_after }}</strong></td>
-                    <td>
-                        <a href="/withdrawals/edit/{{ w.id }}/">Edit</a> |
-                        <a href="/withdrawals/delete/{{ w.id }}/">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Bank</th>
+                        <th>Capital Before</th>
+                        <th>Capital After</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for w in withdrawals %}
+                    <tr>
+                        <td>{{ w.date }}</td>
+                        <td><strong>{{ w.amount }}</strong></td>
+                        <td>{{ w.bank }}</td>
+                        <td>{{ w.capital_before }}</td>
+                        <td><strong>{{ w.capital_after }}</strong></td>
+                        <td>
+                            <a href="/withdrawals/edit/{{ w.id }}/">Edit</a> |
+                            <a href="/withdrawals/delete/{{ w.id }}/">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-        <!-- Pagination -->
-        <div style="margin-top:15px;">
+        <div class="pagination">
             {% if withdrawals.has_previous %}
                 <a href="?page={{ withdrawals.previous_page_number }}">← Prev</a>
             {% endif %}
 
-            <span style="margin:0 10px;">
-                Page {{ withdrawals.number }} of {{ withdrawals.paginator.num_pages }}
-            </span>
+            <span>Page {{ withdrawals.number }} of {{ withdrawals.paginator.num_pages }}</span>
 
             {% if withdrawals.has_next %}
                 <a href="?page={{ withdrawals.next_page_number }}">Next →</a>
             {% endif %}
         </div>
-
     {% else %}
         <div style="text-align:center; padding:40px;">
             <h3>No withdrawals yet</h3>
-            <p style="color:#6b7280;">
-                Withdrawals you make will appear here.
-            </p>
-            <a href="/withdrawals/new">
-                <button>Add your first withdrawal</button>
-            </a>
+            <p style="color:#6b7280;">Withdrawals will appear here.</p>
+            <a href="/withdrawals/new"><button>Add Withdrawal</button></a>
         </div>
     {% endif %}
 </div>
